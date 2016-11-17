@@ -1,3 +1,8 @@
-def test():
-    return (u'Test:'
-            u'ok')
+import json
+
+
+
+
+
+def hello():
+    return json.dumps({'Message':'Hello! This is myrw'})
