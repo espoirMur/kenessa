@@ -1,4 +1,4 @@
 import json
 
 def hello():
-    return json.dumps({'Hello':'Hey'})
+    return json.dumps({'Message':'Hello! This is myrw'})
