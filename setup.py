@@ -8,4 +8,7 @@ setup(name='myrw',
       author_email='rmuhire@exuus.com, dhirwa@exuus.com',
       license='MIT',
       packages=['myrw'],
+      install_requires = [
+
+      ],
       zip_safe=False)
