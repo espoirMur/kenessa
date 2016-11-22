@@ -1,0 +1,12 @@
+MANIFEST.in
+setup.py
+myrw/__init__.py
+myrw.egg-info/PKG-INFO
+myrw.egg-info/SOURCES.txt
+myrw.egg-info/dependency_links.txt
+myrw.egg-info/not-zip-safe
+myrw.egg-info/requires.txt
+myrw.egg-info/top_level.txt
+myrw/json/district.json
+myrw/json/province.json
+myrw/json/sector.json
