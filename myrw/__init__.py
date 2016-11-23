@@ -6,11 +6,12 @@ import myrw
 
 class Province:
     def __init__(self, identifier):
+        self.path = os.path.dirname(myrw.__file__)
         self.identifier = identifier
         self.params = ''
-        self.json_province  = json.loads(open(os.path.dirname(myrw.__file__) + '/json/province.json').read())
-        self.json_district =  json.loads(open(os.path.dirname(myrw.__file__) + '/json/district.json').read())
-        self.json_sector =  json.loads(open(os.path.dirname(myrw.__file__) + '/json/sector.json').read())
+        self.json_province  = json.loads(open(self.path + '/json/province.json').read())
+        self.json_district =  json.loads(open(self.path + '/json/district.json').read())
+        self.json_sector =  json.loads(open(self.path + '/json/sector.json').read())
 
         try:
             if self.identifier.lower() == 'all':
