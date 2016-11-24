@@ -173,7 +173,7 @@ class Province:
 
 
 
-class District():
+class District(Province):
     pass
 
 
