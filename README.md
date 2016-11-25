@@ -17,4 +17,9 @@ Installation
 Using PIP via PyPI
 
     pip install myrw
+    
+Usage
+=====
+
+    >>> from myrw import Province
 
