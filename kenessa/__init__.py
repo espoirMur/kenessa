@@ -6,7 +6,7 @@ import kenessa
 
 class Province:
     def __init__(self, identifier):
-        self.path = os.path.dirname(myrw.__file__)
+        self.path = os.path.dirname(kenessa.__file__)
         self.identifier = identifier
         self.params = ''
         self.json_province  = json.loads(open(self.path + '/json/province.json').read())
