@@ -22,4 +22,7 @@ Usage
 =====
 
     >>> from myrw import Province
+    
+All Provinces
+~~~~~~~~~~~~~
 
