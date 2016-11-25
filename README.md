@@ -16,20 +16,26 @@ Installation
 
 Using PIP via PyPI
 
-    pip install myrw
+    pip install kenessa
     
 Usage
 =====
     
-    from myrw import Province
+    from kenessa import Province
     
-  All provinces
-  ~~~~~~~~~~~~~
+Provinces
+=========
         
-      >>> print Province('all').province()
-  One Province
-  ~~~~~~~~~~~~
-      
-      >>> print Province('1').province()
-      >>> print Province('kigali').province()
-      >>> print Province('01').province()
+    >>> print Province('all').province()
+    >>> print Province('1').province()
+    >>> print Province('kigali').province()
+    >>> print Province('01').province()
+    
+ District
+ ========
+    
+    >>> print Province('all').district()
+    >>> print Province('kigali').district()
+    >>> print Province('1').district()
+    >>> print Province('01').district()
+    
