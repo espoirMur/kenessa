@@ -28,8 +28,8 @@ All provinces
 
         >>> print Province('all').province()
     
-One Province (allow province id, code or name)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+One Province 
+~~~~~~~~~~~~
 
         >>> print Province('1').province()
         >>> print Province('kigali').province()
