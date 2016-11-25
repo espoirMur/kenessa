@@ -26,3 +26,5 @@ Usage
 All provinces
 ~~~~~~~~~~~~~
 
+    >>> print Province('all').province()
+
