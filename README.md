@@ -21,13 +21,15 @@ Using PIP via PyPI
 Usage
 =====
     
-   from myrw import Province
-    all Province
-    >>> print Province('all').province()
-    #One Province
-    #Province ID
-    >>> print Province('1').province()
-    #Province Name
-    >>> print Province('kigali').province()
-    #Province Code
-    >>> print Province('01').province()
+    from myrw import Province
+    
+  All provinces
+  ~~~~~~~~~~~~~
+        
+      >>> print Province('all').province()
+  One Province
+  ~~~~~~~~~~~~
+      
+      >>> print Province('1').province()
+      >>> print Province('kigali').province()
+      >>> print Province('01').province()
