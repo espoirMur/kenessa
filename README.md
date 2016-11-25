@@ -16,7 +16,5 @@ Installation
 
 Using PIP via PyPI
 
-.. code:: bash
-
     pip install myrw
 
