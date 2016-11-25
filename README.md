@@ -26,11 +26,11 @@ Usage
 All provinces
 ~~~~~~~~~~~~~
 
-    >>> print Province('all').province()
+        >>> print Province('all').province()
     
 One Province (allow province id, code or name)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    >>> print Province('1').province()
-    >>> print Province('kigali').province()
-    >>> print Province('01').province()
+        >>> print Province('1').province()
+        >>> print Province('kigali').province()
+        >>> print Province('01').province()
