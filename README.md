@@ -28,6 +28,7 @@ All provinces
 
     >>> print Province('all').province()
     
+    
 One Province 
 ~~~~~~~~~~~~
 
