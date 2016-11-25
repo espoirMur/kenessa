@@ -1,0 +1,3 @@
+[console_scripts]
+myrw-province = myrw.command_line:main
+
