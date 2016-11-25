@@ -10,3 +10,13 @@ Requirements
 ============
 
 -  Python 2.7
+
+Installation
+============
+
+Using PIP via PyPI
+
+.. code:: bash
+
+    pip install myrw
+
