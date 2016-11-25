@@ -1,2 +1,2 @@
 # myrw
-Rwanda Administration location
+rwanda administrative location
