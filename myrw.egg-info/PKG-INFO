@@ -1,10 +1,11 @@
 Metadata-Version: 1.0
 Name: myrw
-Version: 0.1
+Version: 0.1.1
 Summary: Rwanda Administrative Location
 Home-page: https://github.com/rmuhire/myrw
 Author: Remy Muhire, Dieume Hirwa
 Author-email: rmuhire@exuus.com, dhirwa@exuus.com
 License: MIT
 Description: UNKNOWN
+Keywords: rwanda map administration package
 Platform: UNKNOWN
