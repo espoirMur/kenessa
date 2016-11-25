@@ -17,7 +17,7 @@ class Province:
             if self.identifier.lower() == 'all':
                 self.params = 'all'
 
-            elif isinstance(identifier, str):
+            elif isinstance(self.identifier, str):
                 if self.identifier[0] == '0':
                     self.params = 'code'
                 else:
@@ -29,6 +29,7 @@ class Province:
             self.status = 'success'
         except AttributeError:
             self.status = 'error'
+
 
 
 
@@ -173,11 +174,22 @@ class Province:
 
 
 
-class District(Province):
-    pass
+class District:
+    def __init__(self, identifier):
+        self.path = os.path.dirname(myrw.__file__)
+        self.identifier = identifier
+        self.params = ''
+        self.json_province = json.loads(open(self.path + '/json/province.json').read())
+        self.json_district = json.loads(open(self.path + '/json/district.json').read())
+        self.json_sector = json.loads(open(self.path + '/json/sector.json').read())
 
 
-class Sector():
+
+
+
+
+
+class Sector:
     pass
 
 
