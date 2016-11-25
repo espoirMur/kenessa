@@ -1,6 +1,6 @@
-myrw
+Kenessa
 ====
-This is a Python Library [myrw](https://github.com/rmuhire/myrw)
+This is a Python Library [myrw](https://github.com/rmuhire/kenessa)
 It supports Python 2.7
 
 Original Python code is Copyright (C) 2016 The myrw Author.
@@ -20,6 +20,16 @@ Using PIP via PyPI
     
 Usage
 =====
-
-    >>> from myrw import Province
-
+    
+    from myrw import Province
+    
+  All provinces
+  ~~~~~~~~~~~~~
+        
+      >>> print Province('all').province()
+  One Province
+  ~~~~~~~~~~~~
+      
+      >>> print Province('1').province()
+      >>> print Province('kigali').province()
+      >>> print Province('01').province()
