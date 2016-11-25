@@ -1,6 +1,6 @@
 Kenessa
 =======
-The [kenessa](https://pypi.python.org/pypi/kenessa/0.1.4) Python Library help discover Rwanda Administrative Location [
+The [kenessa](https://pypi.python.org/pypi/kenessa/0.1.4) Python Library help discover Rwanda Administrative Location 
 It supports Python 2.7
 
 Original Python code is Copyright (C) 2016 Remy Muhire.
