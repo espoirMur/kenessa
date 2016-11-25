@@ -20,8 +20,8 @@ Using PIP via PyPI
     
 Usage
 =====
-
-    >>> from myrw import Province
+    
+   from myrw import Province
     all Province
     >>> print Province('all').province()
     #One Province
