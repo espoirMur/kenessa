@@ -1,2 +1,2 @@
-# myrw
-rwanda administrative location
+rwanda administrative location Python Library
+=============================================
