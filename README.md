@@ -31,8 +31,8 @@ Provinces
     >>> print Province('kigali').province()
     >>> print Province('01').province()
     
- District
- ========
+District
+========
     
     >>> print Province('all').district()
     >>> print Province('kigali').district()
