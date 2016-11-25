@@ -38,4 +38,13 @@ District
     >>> print Province('kigali').district()
     >>> print Province('1').district()
     >>> print Province('01').district()
+
+Sector
+========
+    
+    >>> print Province('all').sector()
+    >>> print Province('kigali').sector()
+    >>> print Province('1').sector()
+    >>> print Province('01').sector()
+
     
