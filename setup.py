@@ -1,21 +1,21 @@
 from setuptools import setup
 
 setup(
-      name='myrw',
+      name='kenessa',
       version='0.1.1',
       description='Rwanda Administrative Location',
       classifiers=[
       ],
       keywords= 'rwanda map administration package',
-      url='https://github.com/rmuhire/myrw',
-      author='Remy Muhire, Dieume Hirwa',
-      author_email='rmuhire@exuus.com, dhirwa@exuus.com',
+      url='https://github.com/rmuhire/kenessa',
+      author='Remy Muhire',
+      author_email='rmuhire@exuus.com',
       license='MIT',
-      packages=['myrw'],
+      packages=['kenessa'],
       entry_points={
-          'console_scripts': ['myrw-province=myrw.command_line:main'],
+          'console_scripts': ['kenessa-province=kenessa.command_line:main'],
       },
-      package_data = {'myrw': ['json/*.json']},
+      package_data = {'kenessa': ['json/*.json']},
       zip_safe=False
 )
 
