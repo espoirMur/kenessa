@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
       name='kenessa',
-      version='0.1.5',
+      version='0.1.7',
       description='Rwanda Administrative Location',
       classifiers=[
       ],
@@ -18,6 +18,7 @@ setup(
       package_data = {'kenessa': ['json/*.json']},
       zip_safe=False
 )
+
 
 
 
