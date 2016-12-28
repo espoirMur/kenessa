@@ -108,20 +108,15 @@ class Province:
 
 
 class District(Province):
+
     def district(self):
-        self.identifier, params = checker(self.identifier)
-        if params == 'all':
+        if self.identifier == 'all':
             return self.district()
         else:
-
             for district in self.json_district:
-                try:
-                    if district[params].lower() == self.identifier.lower():
-                        return district
-                except AttributeError:
-                    if district[params] == self.identifier:
-                        return district
-
+                keywords = [str(district['id']), district['name'].lower(), district['code']]
+                if self.identifier.lower() in keywords:
+                    return district
             return None
 
     def sector(self):
@@ -129,7 +124,7 @@ class District(Province):
         if params == 'all':
             data = []
             for district in self.json_district:
-                json_d = {district['name']: []}
+                json_d = {district['name'].lower(): []}
                 district['sector'] = ''
                 json_c = []
                 for sector in self.json_sector:
@@ -137,7 +132,7 @@ class District(Province):
                         json_c.append(sector)
 
                 district['sector'] = json_c
-                json_d[district['name']].append(district)
+                json_d[district['name'].lower()].append(district)
 
                 data.append(json_d)
             return data
@@ -150,16 +145,12 @@ class District(Province):
             data['name'] = district['name']
             data['code'] = district['code']
 
-            json_d = {data['name']: []}
             json_c = []
 
             for sector in self.json_sector:
                 if data['id'] == sector['district_id']:
                     json_c.append(sector)
 
-            data['sector'] = json_c
-            json_d[data['name']].append(data)
-
-            return json_d
+            return json_c
 
 
