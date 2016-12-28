@@ -1,77 +1,34 @@
 import json
 import os
 import kenessa
-
+from check import checker
 
 
 class Province:
     def __init__(self, identifier):
         self.path = os.path.dirname(kenessa.__file__)
-        self.identifier = identifier
-        self.params = ''
-        self.json_province  = json.loads(open(self.path + '/json/province.json').read())
-        self.json_district =  json.loads(open(self.path + '/json/district.json').read())
-        self.json_sector =  json.loads(open(self.path + '/json/sector.json').read())
-
-        try:
-            if self.identifier.lower() == 'all':
-                self.params = 'all'
-
-            elif isinstance(self.identifier, str):
-                if self.identifier[0] == '0':
-                    self.params = 'code'
-                else:
-                    try:
-                        self.identifier = int(self.identifier)
-                        self.params = 'id'
-                    except ValueError:
-                        self.params = 'name'
-            self.status = 'success'
-        except AttributeError:
-            self.status = 'error'
-
-
-
+        self.json_province = json.loads(open(self.path + '/json/province.json').read())
+        self.json_district = json.loads(open(self.path + '/json/district.json').read())
+        self.json_sector = json.loads(open(self.path + '/json/sector.json').read())
+        self.identifier = str(identifier).replace(" ", "")
 
     def province(self):
-
-
-        if self.status == 'error':
-            return json.dumps({'error': 'class Province allow string not int'})
-
-
-        if self.params == 'all':
-            return json.dumps({'provinces': self.json_province},
-                        sort_keys=True,
-                        indent=3,
-                        separators=(',', ': ')
-                    )
+        if self.identifier == 'all':
+            return self.json_province
         else:
-            json_data = {'province':[]}
             for province in self.json_province:
                 keywords = province['keywords']
-                keywords = [keyword.lower() for keyword in keywords ]
+                keywords = [keyword.lower() for keyword in keywords]
                 if self.identifier.lower() in keywords:
-                    json_data['province'].append(province)
+                    return province
 
-            return json.dumps(json_data,
-                        sort_keys=True,
-                        indent=3,
-                        separators=(',', ': ')
-                    )
-
+            return None
 
     def district(self):
-
-        data = []
-
-        if self.status == 'error':
-            return json.dumps({'error': 'class Province allow string not int'})
-
-        if self.params == 'all':
+        if self.identifier == 'all':
+            data = []
             for province in self.json_province:
-                json_p = {province['name']:[]}
-                province['district'] = ''
+                json_p = {province['name']: []}
                 json_d = []
                 for district in self.json_district:
                     if province['id'] == district['province_id']:
@@ -81,42 +38,29 @@ class Province:
                 json_p[province['name']].append(province)
 
                 data.append(json_p)
-
-            return json.dumps(data,
-                    sort_keys=False,
-                    indent=3,
-                    separators=(',', ': ')
-                )
+            return data
         else:
             data = {}
-            province = json.loads(Province(str(self.identifier)).province())['province']
-            for item in province:
-                data['id'] = item['id']
-                data['name'] = item['name']
-                data['code'] = item['code']
+            province = Province(self.identifier).province()
+            if province is None:
+                return None
+            data['id'] = province['id']
+            data['name'] = province['name']
+            data['code'] = province['code']
 
-            json_p = {data['name']:[]}
+            json_p = {data['name']: []}
             json_d = []
-
 
             for district in self.json_district:
                 if data['id'] == district['province_id']:
                     json_d.append(district)
-
             data['district'] = json_d
             json_p[data['name']].append(data)
 
-            return json.dumps(json_p,
-                    sort_keys=False,
-                    indent=3,
-                    separators=(',', ': ')
-                )
+            return json_p
 
     def sector(self):
-        if self.status == 'error':
-            return json.dumps({'error': 'class Province allow string not int'})
-
-        if self.params == 'all':
+        if self.identifier == 'all':
             data = []
             for province in self.json_province:
                 json_p = {province['name']: []}
@@ -135,19 +79,15 @@ class Province:
                 json_p[province['name']].append(province)
                 data.append(json_p)
 
-            return json.dumps(data,
-                    sort_keys=False,
-                    indent=3,
-                    separators=(',', ': ')
-                )
+            return data
         else:
             data = {}
-            province = json.loads(Province(str(self.identifier)).province())['province']
-            for item in province:
-                data['id'] = item['id']
-                data['name'] = item['name']
-                data['code'] = item['code']
-
+            province = Province(self.identifier).province()
+            if province is None:
+                return None
+            data['id'] = province['id']
+            data['name'] = province['name']
+            data['code'] = province['code']
             json_p = {data['name']: []}
 
             data_district = []
@@ -164,75 +104,30 @@ class Province:
             data['district'] = data_district
             json_p[data['name']].append(data)
 
-            return json.dumps(json_p,
-                    sort_keys=False,
-                    indent=3,
-                    separators=(',', ': ')
-                )
+            return json_p
 
 
-
-
-class District:
-
-    def __init__(self, identifier):
-        self.path = os.path.dirname(kenessa.__file__)
-        self.identifier = identifier
-        self.params = ''
-        self.json_district = json.loads(open(self.path + '/json/district.json').read())
-        self.json_sector = json.loads(open(self.path + '/json/sector.json').read())
-
-
-        try:
-            if self.identifier.lower() == 'all':
-                self.params = 'all'
-
-            elif isinstance(self.identifier, str):
-                if self.identifier[0] == '0':
-                    self.params = 'code'
-                else:
-                    try:
-                        self.identifier = int(self.identifier)
-                        self.params = 'id'
-                    except ValueError:
-                        self.params = 'name'
-            self.status = 'success'
-        except AttributeError:
-            self.status = 'error'
-
+class District(Province):
     def district(self):
-        if self.status == 'error':
-            return json.dumps({'error': 'class district allow string not int'})
-
-        if self.params == 'all':
-            return json.dumps({'district':self.json_district},
-                              sort_keys=True,
-                              indent=3,
-                              separators=(',', ': ')
-                              )
+        self.identifier, params = checker(self.identifier)
+        if params == 'all':
+            return self.district()
         else:
-            json_data = {'district': []}
+
             for district in self.json_district:
                 try:
-                    if district[self.params].lower() == self.identifier.lower():
-                        json_data['district'].append(district)
+                    if district[params].lower() == self.identifier.lower():
+                        return district
                 except AttributeError:
-                    if district[self.params] == self.identifier:
-                        json_data['district'].append(district)
-            return json.dumps(json_data,
-                              sort_keys=True,
-                              indent=3,
-                              separators=(',', ': ')
-                              )
+                    if district[params] == self.identifier:
+                        return district
+
+            return None
 
     def sector(self):
-
-        data = []
-
-        if self.status == 'error':
-            return json.dumps({'error': 'class Province allow string not int'})
-
-        if self.params == 'all':
+        self.identifier, params = checker(self.identifier)
+        if params == 'all':
+            data = []
             for district in self.json_district:
                 json_d = {district['name']: []}
                 district['sector'] = ''
@@ -245,19 +140,15 @@ class District:
                 json_d[district['name']].append(district)
 
                 data.append(json_d)
-
-            return json.dumps(data,
-                              sort_keys=False,
-                              indent=3,
-                              separators=(',', ': ')
-                              )
+            return data
         else:
             data = {}
-            district = json.loads(District(str(self.identifier)).district())['district']
-            for item in district:
-                data['id'] = item['id']
-                data['name'] = item['name']
-                data['code'] = item['code']
+            district = District(self.identifier).district()
+            if district is None:
+                return None
+            data['id'] = district['id']
+            data['name'] = district['name']
+            data['code'] = district['code']
 
             json_d = {data['name']: []}
             json_c = []
@@ -269,24 +160,6 @@ class District:
             data['sector'] = json_c
             json_d[data['name']].append(data)
 
-            return json.dumps(json_d,
-                              sort_keys=False,
-                              indent=3,
-                              separators=(',', ': ')
-                              )
-
-
-
-
-class Sector:
-    pass
-
-
-
-
-
-
-
-
+            return json_d
 
 
