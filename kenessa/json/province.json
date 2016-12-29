@@ -5,9 +5,9 @@
       "code":"01",
       "keywords":[
          "Kigali",
-         "Kigali City",
-         "Kigali Province",
-         "City of Kigali",
+         "KigaliCity",
+         "KigaliProvince",
+         "CityofKigali",
          "01",
          "1"
       ]
@@ -19,9 +19,9 @@
       "keywords":[
          "south",
          "Southern",
-         "South Province",
-         "Southern Province",
-         "Province of South",
+         "SouthProvince",
+         "SouthernProvince",
+         "ProvinceofSouth",
          "02",
          "2"
       ]
@@ -33,9 +33,9 @@
       "keywords":[
          "West",
          "WESTERN",
-         "West Province",
-         "WESTERN Province",
-         "Province of West",
+         "WestProvince",
+         "WESTERNProvince",
+         "ProvinceofWest",
          "03",
          "3"
       ]
@@ -47,9 +47,9 @@
       "keywords":[
          "North",
          "Northern",
-         "North Province",
-         "Northern Province",
-         "Province of North",
+         "NorthProvince",
+         "NorthernProvince",
+         "ProvinceofNorth",
          "04",
          "4"
       ]
@@ -61,9 +61,9 @@
       "keywords":[
          "East",
          "Eastern",
-         "East Province",
-         "Eastern Province",
-         "Province of East",
+         "EastProvince",
+         "EasternProvince",
+         "ProvinceofEast",
          "05",
          "5"
       ]
