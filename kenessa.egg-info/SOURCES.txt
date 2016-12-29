@@ -4,8 +4,6 @@ setup.py
 kenessa/__init__.py
 kenessa/check.py
 kenessa/command_line.py
-kenessa/init_copy.py
-kenessa/province.py
 kenessa/test_province.py
 kenessa.egg-info/PKG-INFO
 kenessa.egg-info/SOURCES.txt
