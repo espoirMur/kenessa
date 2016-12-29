@@ -107,7 +107,13 @@ class Province:
             return json_p
 
 
-class District(Province):
+class District():
+    def __init__(self, identifier):
+        self.path = os.path.dirname(kenessa.__file__)
+        self.json_province = json.loads(open(self.path + '/json/province.json').read())
+        self.json_district = json.loads(open(self.path + '/json/district.json').read())
+        self.json_sector = json.loads(open(self.path + '/json/sector.json').read())
+        self.identifier = str(identifier).replace(" ", "")
 
     def district(self):
         if self.identifier == 'all':
