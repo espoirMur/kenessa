@@ -1,162 +1,87 @@
+import sqlite3
+from pkg_resources import resource_filename
 import json
-import os
-import kenessa
-from check import checker
+conn = sqlite3.connect(resource_filename(__name__, 'kenessa.db'))  # if kenessa.db doesn't exists it creates it
+c = conn.cursor()
 
 
-class Province:
-    def __init__(self, identifier):
-        self.path = os.path.dirname(kenessa.__file__)
-        self.json_province = json.loads(open(self.path + '/json/province.json').read())
-        self.json_district = json.loads(open(self.path + '/json/district.json').read())
-        self.json_sector = json.loads(open(self.path + '/json/sector.json').read())
-        self.identifier = str(identifier).replace(" ", "")
-
-    def province(self):
-        if self.identifier == 'all':
-            return self.json_province
-        else:
-            for province in self.json_province:
-                keywords = province['keywords']
-                keywords = [keyword.lower() for keyword in keywords]
-                if self.identifier.lower() in keywords:
-                    return province
-
-            return None
-
-    def district(self):
-        if self.identifier == 'all':
-            data = []
-            for province in self.json_province:
-                json_p = {province['name']: []}
-                json_d = []
-                for district in self.json_district:
-                    if province['id'] == district['province_id']:
-                        json_d.append(district)
-
-                province['district'] = json_d
-                json_p[province['name']].append(province)
-
-                data.append(json_p)
-            return data
-        else:
-            data = {}
-            province = Province(self.identifier).province()
-            if province is None:
-                return None
-            data['id'] = province['id']
-            data['name'] = province['name']
-            data['code'] = province['code']
-
-            json_p = {data['name']: []}
-            json_d = []
-
-            for district in self.json_district:
-                if data['id'] == district['province_id']:
-                    json_d.append(district)
-            data['district'] = json_d
-            json_p[data['name']].append(data)
-
-            return json_p
-
-    def sector(self):
-        if self.identifier == 'all':
-            data = []
-            for province in self.json_province:
-                json_p = {province['name']: []}
-                data_district = []
-                for district in self.json_district:
-                    if province['id'] == district['province_id']:
-                        json_d = {district['name']:[]}
-                        json_c = []
-                        for sector in self.json_sector:
-                            if district['id'] == sector['district_id']:
-                                json_c.append(sector)
-                        district['sector'] = json_c
-                        json_d[district['name']].append(district)
-                        data_district.append(json_d)
-                        province['district'] = data_district
-                json_p[province['name']].append(province)
-                data.append(json_p)
-
-            return data
-        else:
-            data = {}
-            province = Province(self.identifier).province()
-            if province is None:
-                return None
-            data['id'] = province['id']
-            data['name'] = province['name']
-            data['code'] = province['code']
-            json_p = {data['name']: []}
-
-            data_district = []
-            for district in self.json_district:
-                if district['province_id'] == data['id']:
-                    json_d = {district['name']: []}
-                    json_c = []
-                    for sector in self.json_sector:
-                        if sector['district_id'] == district['id']:
-                            json_c.append(sector)
-                    district['sector'] = json_c
-                    json_d[district['name']].append(district)
-                    data_district.append(json_d)
-            data['district'] = data_district
-            json_p[data['name']].append(data)
-
-            return json_p
+def get_province():
+    c.execute('SELECT * FROM Province')
+    data = c.fetchall()
+    fields = [description[0] for description in c.description]
+    output = [dict(zip(fields, d)) for d in data]
+    return(output)
 
 
-class District():
-    def __init__(self, identifier):
-        self.path = os.path.dirname(kenessa.__file__)
-        self.json_province = json.loads(open(self.path + '/json/province.json').read())
-        self.json_district = json.loads(open(self.path + '/json/district.json').read())
-        self.json_sector = json.loads(open(self.path + '/json/sector.json').read())
-        self.identifier = str(identifier).replace(" ", "")
-
-    def district(self):
-        if self.identifier == 'all':
-            return self.district()
-        else:
-            for district in self.json_district:
-                keywords = [str(district['id']), district['name'].lower(), district['code']]
-                if self.identifier.lower() in keywords:
-                    return district
-            return None
-
-    def sector(self):
-        self.identifier, params = checker(self.identifier)
-        if params == 'all':
-            data = []
-            for district in self.json_district:
-                json_d = {district['name'].lower(): []}
-                district['sector'] = ''
-                json_c = []
-                for sector in self.json_sector:
-                    if district['id'] == sector['district_id']:
-                        json_c.append(sector)
-
-                district['sector'] = json_c
-                json_d[district['name'].lower()].append(district)
-
-                data.append(json_d)
-            return data
-        else:
-            data = {}
-            district = District(self.identifier).district()
-            if district is None:
-                return None
-            data['id'] = district['id']
-            data['name'] = district['name']
-            data['code'] = district['code']
-
-            json_c = []
-
-            for sector in self.json_sector:
-                if data['id'] == sector['district_id']:
-                    json_c.append(sector)
-
-            return json_c
+def get_district(province):
+    fields = [description[0] for description in c.description]
+    province = province.title()
+    if province == 'All':
+        c.execute('SELECT id, name FROM District')
+        data = c.fetchall()
+        output = [dict(zip(fields, d)) for d in data]
+        return(output)
+    else:
+        c.execute('SELECT District.id,District.name \
+                    FROM District INNER JOIN Province ON District.province_id = Province.id \
+                    WHERE Province.name = (?)', (province,))
+        data = c.fetchall()
+        output = [dict(zip(fields, d)) for d in data]
+        return (output)
 
 
+def get_sector(district):
+    fields = [description[0] for description in c.description]
+    district = district.title()
+    if district == 'All':
+        c.execute('SELECT id,name FROM Sector')
+        data = c.fetchall()
+        output = [dict(zip(fields, d)) for d in data]
+        return(output)
+        # return(c.fetchall())
+    else:
+        c.execute('SELECT Sector.id,Sector.name \
+                    FROM Sector INNER JOIN District ON Sector.district_id = District.id \
+                    WHERE District.name = (?)', (district,))
+        data = c.fetchall()
+        output = [dict(zip(fields, d)) for d in data]
+        return(output)
+        # return (c.fetchall())
+
+
+def get_cell(sector):
+    fields = [description[0] for description in c.description]
+    sector = sector.title()
+    if sector == 'All':
+        c.execute('SELECT id,name FROM Cell')
+        data = c.fetchall()
+        output = [dict(zip(fields, d)) for d in data]
+        return(output)
+        # return(c.fetchall())
+    else:
+        c.execute('SELECT Cell.id,Cell.name\
+                    FROM Cell INNER JOIN Sector ON Cell.sector_id= Sector.id \
+                    WHERE Sector.name = (?)', (sector,))
+        data = c.fetchall()
+        output = [dict(zip(fields, d)) for d in data]
+        return(output)
+        # return(c.fetchall())
+
+
+def get_village(cell):
+    fields = [description[0] for description in c.description]
+    cell = cell.title()
+    if cell == 'All':
+        c.execute('SELECT id,name FROM Village')
+        data = c.fetchall()
+        output = [dict(zip(fields, d)) for d in data]
+        return(output)
+        # return(c.fetchall())
+    else:
+        c.execute('SELECT Village.id,Village.name \
+                    FROM Village INNER JOIN Cell ON Village.cell_id = Cell.id \
+                    WHERE Cell.name = (?)', (cell,))
+        data = c.fetchall()
+        output = [dict(zip(fields, d)) for d in data]
+        return(output)
+        # return(c.fetchall())
