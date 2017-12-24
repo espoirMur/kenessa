@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c5088b10-6330-4d13-b3c9-692b9f082da9" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/kenessa.egg-info/PKG-INFO" afterPath="$PROJECT_DIR$/kenessa.egg-info/PKG-INFO" />
-      <change beforePath="$PROJECT_DIR$/kenessa/__init__.py" afterPath="$PROJECT_DIR$/kenessa/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/setup.py" afterPath="$PROJECT_DIR$/setup.py" />
     </list>
     <ignored path="myrw.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -168,6 +165,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -184,7 +182,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
