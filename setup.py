@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
       name='kenessa',
-      version='0.2.1',
+      version='0.2.2',
       description='Rwanda Administrative Location',
       classifiers=[
             "Programming Language :: Python",
