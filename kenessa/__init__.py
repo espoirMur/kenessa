@@ -4,6 +4,7 @@ from pkg_resources import resource_filename
 conn = sqlite3.connect(resource_filename(__name__, 'kenessa.db'))
 
 
+
 class Kenessa:
     def __init__(self):
         self.c = conn.cursor()
