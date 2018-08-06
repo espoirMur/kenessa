@@ -1,8 +1,8 @@
 import sqlite3
 import re
 from pkg_resources import resource_filename
-conn = sqlite3.connect(resource_filename(__name__, 'kenessa.db'))
-
+conn = sqlite3.connect(resource_filename(__name__, 'kenessa.db'),
+                       check_same_thread=False)
 
 
 class Kenessa:
